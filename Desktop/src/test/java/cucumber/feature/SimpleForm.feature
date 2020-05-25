@@ -1,9 +1,12 @@
 Feature: Show a message and get total
   Scenario: Show a message
     Given User is on Home Page
-    When User inputs "thanhnd3"
-    And Click to the Show Message button
-    Then Message is displayed on Home Page
+    When User inputs a message
+        | msg      |
+        | thanhnd1 |
+        | thanhnd2 |
+        | thanhnd3 |
+
 
 #  Scenario: Get total of 2 number
 #    Given User is on Home Page

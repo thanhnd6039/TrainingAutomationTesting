@@ -1,5 +1,6 @@
 package cucumber.step_definition;
 
+import cucumber.api.DataTable;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
@@ -8,11 +9,12 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
 
+import java.util.List;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 public class SimpleFormSteps {
     private static WebDriver driver;
-    private String msg = "";
     @Given("^User is on Home Page$")
     public void user_is_on_Home_Page(){
         String projectDirPath =  System.getProperty("user.dir");
@@ -25,24 +27,22 @@ public class SimpleFormSteps {
         driver.get(baseUrl);
     }
 
-    @When("^User inputs \"(.*)\"")
-    public void user_inputs_a_message(String message){
-        msg = message;
-        driver.findElement(By.id("user-message")).sendKeys(msg);
-    }
-
-    @When("^Click to the Show Message button$")
-    public void click_to_the_Show_Message_button(){
-        driver.findElement(By.xpath("//button[contains(text(),'Show Message')]")).click();
-    }
-
-    @Then("^Message is displayed on Home Page$")
-    public void message_is_displayed_on_Home_Page() {
-        String expectedMessage = msg;
-        String actualMessage = driver.findElement(By.id("display")).getText();
-        Assert.assertEquals(actualMessage, expectedMessage);
+    @When("^User inputs a message")
+    public void user_inputs_a_message(DataTable msgList){
+        List<Map<String, String>> data = msgList.asMaps(String.class, String.class);
+        for (Map<String, String> item : data) {
+            System.out.println("message: "+item.get("msg"));
+            String msg = item.get("msg");
+            driver.findElement(By.id("user-message")).sendKeys(msg);
+            driver.findElement(By.xpath("//button[contains(text(),'Show Message')]")).click();
+            String expectedMessage = msg;
+            String actualMessage = driver.findElement(By.id("display")).getText();
+            Assert.assertEquals(actualMessage, expectedMessage);
+        }
         driver.quit();
     }
+
+
 
 //    @When("^User inputs value for a and b$")
 //    public void user_inputs_value_for_a_and_b(){
