@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.Select;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -24,6 +25,12 @@ public class SeleniumTest {
         driver.navigate().to(baseUrl+searchStr);
         List<WebElement> items = driver.findElements(By.xpath(".//*[@class='noo-product-inner']"));
         items.get(0).click();
+        WebElement colorOption = driver.findElement(By.id("pa_color"));
+        Select color = new Select(colorOption);
+        color.selectByValue("white");
+        WebElement sizeOption = driver.findElement(By.id("pa_size"));
+        Select size = new Select(sizeOption);
+        size.selectByValue("medium");
         Thread.sleep(3000);
         driver.quit();
     }
