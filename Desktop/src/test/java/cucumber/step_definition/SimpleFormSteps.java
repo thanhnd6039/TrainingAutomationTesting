@@ -28,17 +28,16 @@ public class SimpleFormSteps {
     }
 
     @When("^User inputs a message")
-    public void user_inputs_a_message(DataTable msgList){
-        List<Map<String, String>> data = msgList.asMaps(String.class, String.class);
-        for (Map<String, String> item : data) {
-            System.out.println("message: "+item.get("msg"));
-            String msg = item.get("msg");
-            driver.findElement(By.id("user-message")).sendKeys(msg);
+    public void user_inputs_a_message(List<MessageInfo> msgInfos){
+        for (MessageInfo msgInfo: msgInfos){
+            System.out.println("Message: "+msgInfo.getMessage());
+            driver.findElement(By.id("user-message")).sendKeys(msgInfo.getMessage());
             driver.findElement(By.xpath("//button[contains(text(),'Show Message')]")).click();
-            String expectedMessage = msg;
+            String expectedMessage = msgInfo.getMessage();
             String actualMessage = driver.findElement(By.id("display")).getText();
             Assert.assertEquals(actualMessage, expectedMessage);
         }
+
         driver.quit();
     }
 

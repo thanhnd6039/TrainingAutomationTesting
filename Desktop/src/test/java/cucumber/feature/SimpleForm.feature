@@ -2,10 +2,8 @@ Feature: Show a message and get total
   Scenario: Show a message
     Given User is on Home Page
     When User inputs a message
-        | msg      |
+        | message  |
         | thanhnd1 |
-        | thanhnd2 |
-        | thanhnd3 |
 
 
 #  Scenario: Get total of 2 number
