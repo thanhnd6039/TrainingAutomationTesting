@@ -35,10 +35,68 @@ public class SeleniumTest {
         WebElement sizeOption = driver.findElement(By.id("pa_size"));
         Select size = new Select(sizeOption);
         size.selectByValue("medium");
+        wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[@class='single_add_to_cart_button button alt']")));
         WebElement btnAddToCart = driver.findElement(By.xpath("//button[@class='single_add_to_cart_button button alt']"));
-        wait.until(ExpectedConditions.elementToBeClickable(btnAddToCart));
+        btnAddToCart.click();
+
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[@class='cart-item has-items']")));
+        WebElement cart = driver.findElement(By.xpath("//span[@class='cart-item has-items']"));
+        cart.click();
+
+        wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//a[@class='checkout-button button alt wc-forward']")));
+        WebElement btnProcessToCheckout = driver.findElement(By.xpath("//a[@class='checkout-button button alt wc-forward']"));
+        btnProcessToCheckout.click();
+
+        WebElement txtFirstName = driver.findElement(By.id("billing_first_name"));
+        WebElement txtLastName = driver.findElement(By.id("billing_last_name"));
+        WebElement txtCompanyName = driver.findElement(By.id("billing_company"));
+
+
+        txtFirstName.sendKeys("Thanh");
+        txtLastName.sendKeys("Nguyen Duc");
+        txtCompanyName.sendKeys("FreshCompany");
+        WebElement cboCountry = driver.findElement(By.id("select2-billing_country-container"));
+        cboCountry.click();
+        List<WebElement> countryList = driver.findElements(By.xpath("//ul/li[@class='select2-results__option']"));
         
-        Thread.sleep(3000);
-        driver.quit();
+        for (WebElement country: countryList){
+            if (country.getText().equals("India")){
+                country.click();
+                Thread.sleep(3000);
+                break;
+            }
+        }
+
+        WebElement txtStreetAddress = driver.findElement(By.id("billing_address_1"));
+        txtStreetAddress.sendKeys("86/34/11 Thong Nhat Street");
+        WebElement txtCity = driver.findElement(By.id("billing_city"));
+        txtCity.sendKeys("Minto Road");
+        WebElement cboState = driver.findElement(By.id("select2-billing_state-container"));
+        cboState.click();
+        List<WebElement> stateList = driver.findElements(By.xpath("//ul/li[@class='select2-results__option']"));
+        for (WebElement state: stateList){
+            if(state.getText().equals("Delhi")){
+                state.click();
+                Thread.sleep(3000);
+                break;
+            }
+        }
+
+
+        WebElement txtPostCode = driver.findElement(By.id("billing_postcode"));
+        txtPostCode.sendKeys("110002");
+        WebElement txtPhone = driver.findElement(By.id("billing_phone"));
+        txtPhone.sendKeys("123456789");
+        WebElement txtEmailAddress = driver.findElement(By.id("billing_email"));
+        txtEmailAddress.sendKeys("thanh1@gmail.com");
+        Thread.sleep(5000);
+        wait.until(ExpectedConditions.elementToBeClickable(By.id("terms")));
+        WebElement chkAccept = driver.findElement(By.id("terms"));
+        chkAccept.click();
+        WebElement btnPlaceOrder = driver.findElement(By.id("place_order"));
+        btnPlaceOrder.click();
+
+
+//        driver.quit();
     }
 }
