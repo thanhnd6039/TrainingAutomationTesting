@@ -58,7 +58,7 @@ public class SeleniumTest {
         WebElement cboCountry = driver.findElement(By.id("select2-billing_country-container"));
         cboCountry.click();
         List<WebElement> countryList = driver.findElements(By.xpath("//ul/li[@class='select2-results__option']"));
-        
+
         for (WebElement country: countryList){
             if (country.getText().equals("India")){
                 country.click();
