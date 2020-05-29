@@ -61,6 +61,8 @@ public class CheckoutPage {
     @FindBy(id = "place_order")
     private WebElement btnPlaceOrder;
 
+
+
     public void setFirstName(String name){
         txtFirstName.sendKeys(name);
     }
@@ -118,6 +120,10 @@ public class CheckoutPage {
     }
 
     public void checkTermAndConditions(){
+        try {
+            Thread.sleep(3000);
+        }
+        catch (InterruptedException e){}
         wait.until(
                 ExpectedConditions.and(
                         ExpectedConditions.presenceOfElementLocated(By.id("terms")),
@@ -131,6 +137,7 @@ public class CheckoutPage {
     public void clickOnPlaceOrderBtn(){
         btnPlaceOrder.click();
     }
+
 
     public void fillPersonalDetails(){
         setFirstName("Thanh");
