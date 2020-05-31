@@ -1,4 +1,7 @@
 package cucumber.data_providers;
+import cucumber.enums.DriverType;
+import cucumber.enums.EnvironmentType;
+
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -42,6 +45,35 @@ public class ConfigFileReader {
             return url;
         }else {
             throw new RuntimeException("url is not specified in the Configuration.properties file");
+        }
+    }
+
+    public DriverType getBrowser(){
+        String browserName = properties.getProperty("browser");
+        if (browserName == null || browserName.equalsIgnoreCase("chrome")){
+            return DriverType.CHROME;
+        }
+        else if (browserName.equalsIgnoreCase("firefox")){
+            return DriverType.FIREFOX;
+        }
+        else if (browserName.equalsIgnoreCase("iexplorer")){
+            return DriverType.INTERNETEXPLORER;
+        }
+        else {
+            throw new RuntimeException("Browser name key value in Configuration.properties file is not matched: "+browserName);
+        }
+    }
+
+    public EnvironmentType getEnvironment(){
+        String environmentName = properties.getProperty("environment");
+        if (environmentName == null || environmentName.equalsIgnoreCase("local")){
+            return EnvironmentType.LOCAL;
+        }
+        else if (environmentName.equalsIgnoreCase("remote")){
+            return EnvironmentType.REMOTE;
+        }
+        else {
+            throw new RuntimeException("Environment name key value in Configuration.properties file is not matched: "+environmentName);
         }
     }
 }

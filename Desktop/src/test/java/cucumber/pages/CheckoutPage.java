@@ -1,9 +1,7 @@
 package cucumber.pages;
 
 import org.apache.commons.validator.routines.EmailValidator;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -119,10 +117,17 @@ public class CheckoutPage {
         txtEmailAddress.sendKeys(email);
     }
 
-    public void checkTermAndConditions(){
-        try {
-            Thread.sleep(3000);
-        }
+    public void checkTermAndConditions(WebDriver driver){
+        Point point = chkAccept.getLocation();
+        int x = point.getX();
+        int y = point.getY();
+        System.out.println("x: "+x);
+        System.out.println("y: "+y);
+        try { Thread.sleep(3000); }
+        catch (InterruptedException e){}
+        JavascriptExecutor je = (JavascriptExecutor) driver;
+        je.executeScript("scroll(689,1433)");
+        try { Thread.sleep(3000); }
         catch (InterruptedException e){}
         wait.until(
                 ExpectedConditions.and(

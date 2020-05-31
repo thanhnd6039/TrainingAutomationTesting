@@ -4,7 +4,9 @@ import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import cucumber.data_providers.ConfigFileReader;
+import cucumber.managers.FileReaderManager;
 import cucumber.managers.PageObjectManager;
+import cucumber.managers.WebDriverManager;
 import cucumber.pages.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -23,16 +25,15 @@ public class CheckoutSteps {
     private CheckoutPage checkoutPage;
     private ConfirmationPage confirmationPage;
     private PageObjectManager pageObjectManager;
-    private ConfigFileReader configFileReader;
+    private WebDriverManager webDriverManager;
+
 
 
     @Given("^User is on home page$")
     public void user_is_on_home_page(){
-        configFileReader = new ConfigFileReader();
-        String baseUrl = configFileReader.geturl();
-        String driverPath = configFileReader.getDriverPath();
-        System.setProperty("webdriver.chrome.driver",driverPath);
-        driver = new ChromeDriver();
+        String baseUrl = FileReaderManager.getInstance().getConfigReader().geturl();
+        webDriverManager = new WebDriverManager();
+        driver = webDriverManager.getDriver();
         pageObjectManager = new PageObjectManager(driver);
         homePage = pageObjectManager.getHomePage();
         homePage.navigateToHomePage(baseUrl);
@@ -66,7 +67,7 @@ public class CheckoutSteps {
 
     @When("^Place an order$")
     public void place_an_order(){
-        checkoutPage.checkTermAndConditions();
+        checkoutPage.checkTermAndConditions(driver);
         checkoutPage.clickOnPlaceOrderBtn();
     }
 
