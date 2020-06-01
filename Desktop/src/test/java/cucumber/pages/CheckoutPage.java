@@ -90,6 +90,7 @@ public class CheckoutPage {
     }
 
     public void setCity(String cityName){
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.id("billing_city")));
         txtCity.sendKeys(cityName);
     }
 
@@ -117,16 +118,14 @@ public class CheckoutPage {
         txtEmailAddress.sendKeys(email);
     }
 
-    public void checkTermAndConditions(WebDriver driver){
-        Point point = chkAccept.getLocation();
-        int x = point.getX();
-        int y = point.getY();
-        System.out.println("x: "+x);
-        System.out.println("y: "+y);
-        try { Thread.sleep(3000); }
-        catch (InterruptedException e){}
-        JavascriptExecutor je = (JavascriptExecutor) driver;
-        je.executeScript("scroll(689,1433)");
+    public void checkTermAndConditions(){
+//        Point point = chkAccept.getLocation();
+//        int x = point.getX();
+//        int y = point.getY();
+//        System.out.println("x: "+x);
+//        System.out.println("y: "+y);
+//        JavascriptExecutor je = (JavascriptExecutor) driver;
+//        je.executeScript("scroll(689,1433)");
         try { Thread.sleep(3000); }
         catch (InterruptedException e){}
         wait.until(

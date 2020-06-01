@@ -76,4 +76,13 @@ public class ConfigFileReader {
             throw new RuntimeException("Environment name key value in Configuration.properties file is not matched: "+environmentName);
         }
     }
+
+    public String getTestDataPath(){
+        String testDataPath = properties.getProperty("testDataPath");
+        if (testDataPath != null){
+            return testDataPath;
+        }else {
+            throw new RuntimeException("Test Data path is not specified in the Configuration.properties file for the key: testDataPath");
+        }
+    }
 }

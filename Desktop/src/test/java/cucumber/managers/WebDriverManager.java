@@ -54,7 +54,7 @@ public class WebDriverManager {
                 break;
             case INTERNETEXPLORER:
                 driverPath += "IEDriverServer.exe";
-                System.setProperty(FIREFOX_DRIVER_PROPERTY, driverPath);
+                System.setProperty(IE_DRIVER_PROPERTY, driverPath);
                 driver = new InternetExplorerDriver();
                 break;
         }
