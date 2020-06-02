@@ -1,5 +1,6 @@
 package cucumber.pages;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -30,6 +31,10 @@ public class ProductPage {
 
     public void selectProduct(int productNumber){
         productList.get(productNumber).click();
+    }
+
+    public String getProductName(int productNumber){
+        return productList.get(productNumber).findElement(By.cssSelector("h3")).getText();
     }
 
     public void clickOnAddToCardBtn(){

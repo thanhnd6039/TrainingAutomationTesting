@@ -4,6 +4,7 @@ public class Customer {
 
     public String firstName;
     public String lastName;
+    public String companyName;
     public int age;
     public String emailAddress;
     public Address address;

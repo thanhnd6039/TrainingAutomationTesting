@@ -48,6 +48,15 @@ public class ConfigFileReader {
         }
     }
 
+    public long getImplicitlyWait(){
+        String implicitWait = properties.getProperty("implicitlyWait");
+        if (implicitWait != null){
+            return Long.parseLong(implicitWait);
+        }else {
+            throw new RuntimeException("ImplicitlyWait is not specied in the Configuration.properties file");
+        }
+    }
+
     public DriverType getBrowser(){
         String browserName = properties.getProperty("browser");
         if (browserName == null || browserName.equalsIgnoreCase("chrome")){

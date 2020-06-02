@@ -5,7 +5,7 @@ Feature: Check out
     When He searches for dress
     And Choose to buy the first item
     And Move to checkout form mini cart
-    And Fill "<customer>"personal details on checkout page
+    And Fill "<customer>" personal details on checkout page
     And Place an order
     Then Show a message successful order
 

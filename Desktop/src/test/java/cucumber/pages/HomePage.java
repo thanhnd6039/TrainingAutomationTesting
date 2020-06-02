@@ -1,5 +1,6 @@
 package cucumber.pages;
 
+import cucumber.selenium.Wait;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -23,6 +24,7 @@ public class HomePage {
         driver.get(baseUrl);
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         driver.manage().window().maximize();
+        Wait.untilPageLoadComplete(driver);
     }
 
     public void searchProduct(String searchStr){

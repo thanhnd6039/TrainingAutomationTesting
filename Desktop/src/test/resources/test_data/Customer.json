@@ -2,6 +2,7 @@
   {
     "firstName": "Lakshay",
     "lastName": "Sharma",
+    "companyName": "company1",
     "age": 35,
     "emailAddress": "Lakshay@Gmail.com",
     "address": {
@@ -20,6 +21,7 @@
   {
     "firstName": "Virender",
     "lastName": "Singh",
+    "companyName": "company2",
     "age": 35,
     "emailAddress": "Virender@Gmail.com",
     "address": {

@@ -1,5 +1,7 @@
 package cucumber.pages;
 
+import cucumber.selenium.Wait;
+import cucumber.test_data_types.Customer;
 import org.apache.commons.validator.routines.EmailValidator;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
@@ -12,7 +14,9 @@ import java.util.List;
 public class CheckoutPage {
 
     WebDriverWait wait;
+    WebDriver driver;
     public CheckoutPage(WebDriver driver){
+        this.driver = driver;
         PageFactory.initElements(driver, this);
         wait = new WebDriverWait(driver, 20);
     }
@@ -75,11 +79,11 @@ public class CheckoutPage {
 
     public void setCountryName(String countryName){
         cboCountry.click();
+        Wait.untilJQueryIsDone(driver);
         for (WebElement country: countryList){
             if (country.getText().equals(countryName)){
                 country.click();
-                try { Thread.sleep(3000);}
-                catch (InterruptedException e) {}
+                Wait.untilJQueryIsDone(driver);
                 break;
             }
         }
@@ -96,11 +100,11 @@ public class CheckoutPage {
 
     public void setState(String stateName){
         cboState.click();
+        Wait.untilJQueryIsDone(driver);
         for (WebElement state: stateList){
             if (state.getText().equals(stateName)){
                 state.click();
-                try { Thread.sleep(3000); }
-                catch (InterruptedException e){}
+                Wait.untilJQueryIsDone(driver);
                 break;
             }
         }
@@ -119,15 +123,7 @@ public class CheckoutPage {
     }
 
     public void checkTermAndConditions(){
-//        Point point = chkAccept.getLocation();
-//        int x = point.getX();
-//        int y = point.getY();
-//        System.out.println("x: "+x);
-//        System.out.println("y: "+y);
-//        JavascriptExecutor je = (JavascriptExecutor) driver;
-//        je.executeScript("scroll(689,1433)");
-        try { Thread.sleep(3000); }
-        catch (InterruptedException e){}
+        Wait.untilJQueryIsDone(driver);
         wait.until(
                 ExpectedConditions.and(
                         ExpectedConditions.presenceOfElementLocated(By.id("terms")),
@@ -140,20 +136,22 @@ public class CheckoutPage {
 
     public void clickOnPlaceOrderBtn(){
         btnPlaceOrder.click();
+        Wait.untilJQueryIsDone(driver);
+        Wait.untilPageLoadComplete(driver);
     }
 
 
-    public void fillPersonalDetails(){
-        setFirstName("Thanh");
-        setLastName("Nguyen Duc");
-        setCompanyName("Fresh Company");
-        setCountryName("India");
-        setStreetAddress("86/34, Thong Nhat Street");
-        setCity("Minto Road");
-        setState("Delhi");
-        setPostCode("110002");
-        setPhone("123456789");
-        setEmail("test@gmail.com");
+    public void fillPersonalDetails(Customer customer){
+        setFirstName(customer.firstName);
+        setLastName(customer.lastName);
+        setCompanyName(customer.companyName);
+        setCountryName(customer.address.country);
+        setStreetAddress(customer.address.streetAddress);
+        setCity(customer.address.city);
+        setState(customer.address.county);
+        setPostCode(customer.address.postCode);
+        setPhone(customer.phoneNumber.home);
+        setEmail(customer.emailAddress);
     }
 
 
