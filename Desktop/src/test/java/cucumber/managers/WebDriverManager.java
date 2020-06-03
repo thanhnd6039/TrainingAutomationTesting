@@ -4,6 +4,7 @@ import cucumber.enums.DriverType;
 import cucumber.enums.EnvironmentType;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 
@@ -14,6 +15,7 @@ public class WebDriverManager {
     private static final String CHROME_DRIVER_PROPERTY = "webdriver.chrome.driver";
     private static final String FIREFOX_DRIVER_PROPERTY = "webdriver.gecko.driver";
     private static final String IE_DRIVER_PROPERTY = "webdriver.ie.driver";
+    private static final String EDGE_DRIVER_PROPERTY = "webdriver.edge.driver";
 
     public WebDriverManager(){
         driverType = FileReaderManager.getInstance().getConfigReader().getBrowser();
@@ -56,6 +58,11 @@ public class WebDriverManager {
                 driverPath += "IEDriverServer.exe";
                 System.setProperty(IE_DRIVER_PROPERTY, driverPath);
                 driver = new InternetExplorerDriver();
+                break;
+            case EDGE:
+                driverPath += "msedgedriver.exe";
+                System.setProperty(EDGE_DRIVER_PROPERTY, driverPath);
+                driver = new EdgeDriver();
                 break;
         }
         return driver;

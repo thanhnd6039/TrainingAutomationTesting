@@ -2,7 +2,6 @@ package cucumber.pages;
 
 import cucumber.selenium.Wait;
 import cucumber.test_data_types.Customer;
-import org.apache.commons.validator.routines.EmailValidator;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;

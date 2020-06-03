@@ -68,6 +68,9 @@ public class ConfigFileReader {
         else if (browserName.equalsIgnoreCase("iexplorer")){
             return DriverType.INTERNETEXPLORER;
         }
+        else if (browserName.equalsIgnoreCase("edge")){
+            return DriverType.EDGE;
+        }
         else {
             throw new RuntimeException("Browser name key value in Configuration.properties file is not matched: "+browserName);
         }
@@ -93,5 +96,13 @@ public class ConfigFileReader {
         }else {
             throw new RuntimeException("Test Data path is not specified in the Configuration.properties file for the key: testDataPath");
         }
+    }
+
+    public String getReportConfigPath(){
+        String reportConfigPath = properties.getProperty("reportConfigPath");
+        if(reportConfigPath!= null)
+            return reportConfigPath;
+        else
+            throw new RuntimeException("Report Config Path not specified in the Configuration.properties file for the Key:reportConfigPath");
     }
 }

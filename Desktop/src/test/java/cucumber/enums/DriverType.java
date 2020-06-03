@@ -3,5 +3,6 @@ package cucumber.enums;
 public enum DriverType {
     FIREFOX,
     CHROME,
-    INTERNETEXPLORER
+    INTERNETEXPLORER,
+    EDGE
 }
